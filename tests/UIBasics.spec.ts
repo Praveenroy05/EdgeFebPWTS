@@ -1,6 +1,7 @@
 // Enter text in the input field and click on the element.
 
 import {test, expect} from '@playwright/test'
+import { waitForDebugger } from 'node:inspector'
 
 test('Fill the input filed and click on the element', async function({page}){
     // Launch the browser
@@ -30,3 +31,37 @@ test('Fill the input filed and click on the element', async function({page}){
 
 
 })
+
+test("Handling radio button and checkbox", async ({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com/")
+    // check() - To select the checkbox or radio button.
+    // click() - To click on the element.
+    await page.locator("#female").check()
+    // toBeChecked() - To verify if the checkbox or radio button is selected or not.
+    await expect(page.locator("#female")).toBeChecked()
+    await page.locator("#tuesday").check()
+    await expect(page.locator("#tuesday")).toBeChecked()
+    await page.locator("#tuesday").uncheck()
+    await expect(page.locator("#tuesday"), "Checkbox should not be selected").not.toBeChecked()
+   
+})
+
+
+test("Handling text value from an element"  , async ({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com/")
+    // textContent() - To get the text value from the element.
+    // innerText() - To get the text value from the element but it will ignore the hidden text.
+
+    const text = await page.locator("h3.post-title a").innerText()
+    console.log(text);
+
+    // how to get the text value from multiple matching elements
+    // allTextContents() - 
+    // allInnerTexts() - To get the text value from multiple matching elements but it will ignore the hidden text.
+    const allTexts = await page.locator("h2.title").allInnerTexts()
+    console.log(allTexts)
+    const count = await page.locator("h2.title").count()
+    console.log(count)
+    
+})
+
