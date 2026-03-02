@@ -60,7 +60,24 @@ test("Handling drop down element developed using non SELECT tag", async ({page})
     await page.locator("#withOptGroup").click()
     await page.getByText("A root option", {exact: true}).click()
 
+    // first()
+    // last()
+    // nth(index) - index starts with 0
+
+    await page.locator("div.css-b62m3t-container").last().click()
+    await page.locator("#react-select-4-option-1").click()
+    await page.locator("#react-select-4-option-3").click()
+
 })
+
+// 1. Alerts/popup - dialog
+// 2. Multiple windows - popup
+// 3. Frames
+// 4. fileUpload
+// 5. Calendar
+// 6. Table validation
+
+// Framework - POM
 
 
  

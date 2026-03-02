@@ -42,7 +42,31 @@ test("Mouse Over an element", async ({page})=>{
 test("Scrolling on the page", async({page})=>{
     await page.goto("https://testautomationpractice.blogspot.com/")
 
+    await page.getByText("Download Files").scrollIntoViewIfNeeded()
+
+    await page.getByText("Download Files", {exact: true}).click()
+    await expect(page.url()).toContain("download-files")
+    await expect(page.locator("button#generateTxt")).toBeVisible()
 })
+
+test("Drag and drop operations", async ({page})=>{
+    await page.goto("https://testautomationpractice.blogspot.com/")
+
+    // Locator.dragTo(Locator)
+    let sourceElement =  page.locator("div#draggable")
+    let targetElement = page.locator("div#droppable")
+
+    // await sourceElement.dragTo(targetElement)
+
+    await sourceElement.hover()
+    await page.mouse.down()
+    await targetElement.hover()
+    await page.mouse.up()
+
+    await expect(page.getByText("Dropped!", {exact:true})).toBeVisible()
+})
+
+
 
 
 
