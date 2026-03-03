@@ -18,17 +18,21 @@ import {test, expect} from '@playwright/test'
 test("Alert Handling", async ({page})=>{
     await page.goto("https://testautomationpractice.blogspot.com/")
     // on(event) - Wait for event to appear on the page
+    const text = "Testing"
 
     page.on("dialog", function(dialog){
         console.log(dialog.message())
-        dialog.accept("Text")
+        dialog.accept(text)
     })
     await page.locator("button#alertBtn").click()
     await page.locator("button#confirmBtn").click()
     
-    await expect(page.locator("#demo")).toHaveText("You pressed Cancel!")
+    await expect(page.locator("#demo")).toHaveText("You pressed OK!")
 
     // Prompt alert
+    await page.locator("button#promptBtn").click()
+    await expect(page.locator("#demo")).toContainText(text)
+
 
 
 })
