@@ -27,6 +27,7 @@ test("Multiple tabs or window handling", async ({page})=>{
     // const newpgae2 = await newpge1
 
     await expect(newPage.locator("h2#bindings")).toContainText("WebDriver Language Bindings")
+    //await newPage.close()
 
     await page.bringToFront()
 
