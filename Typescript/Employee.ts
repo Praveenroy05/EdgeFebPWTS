@@ -49,7 +49,7 @@ ClassName.fun()
 
 */
 
-class Employee{
+export class Employee{
     // Properties
 
     empId: number 

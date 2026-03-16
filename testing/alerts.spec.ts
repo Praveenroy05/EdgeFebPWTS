@@ -26,6 +26,7 @@ test("Alert Handling", async ({page})=>{
     })
     await page.locator("button#alertBtn").click()
     await page.locator("button#confirmBtn").click()
+    // await page.screenshot()
     
     await expect(page.locator("#demo")).toHaveText("You pressed OK!")
 
