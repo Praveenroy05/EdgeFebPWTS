@@ -36,3 +36,17 @@ test("Test2", async()=>{
 test("Test3", async()=>{
     console.log("Test3");
 })
+
+
+const obj = 
+{
+
+url : "https://rahulshettyacademy.com/client",
+email :"testnHNk@gmail.com",
+password : "Testing@1234",
+incorrectPassword : "Test"
+
+}
+
+console.log(obj.url);
+

@@ -31,3 +31,4 @@ test("Validate the product details on View Page", async ()=>{
 })
 
 
+let i = [10,2,3,4]

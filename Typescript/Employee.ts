@@ -77,6 +77,7 @@ export class Employee{
 const emp1 = new Employee(1, "Rahul", 100000, 10000)
 emp1.employeeInformation()
 Employee.displayCompanyName()
+console.log(emp1);
 
 const emp2 = new Employee(2, "John", 200000, 20000)
 emp2.employeeInformation()
