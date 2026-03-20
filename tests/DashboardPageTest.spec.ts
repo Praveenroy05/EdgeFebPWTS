@@ -4,6 +4,9 @@ import { DashboardPage } from '../pages/DashboardPage'
 
 // Test data can be written inside the test file or you can add it in the files like excel or JSON
 
+test.describe.configure({mode: 'serial', timeout:60000})
+
+
 let url = "https://rahulshettyacademy.com/client"
 let email = "testnHNk@gmail.com"
 let password = "Testing@1234"
@@ -20,15 +23,17 @@ test.beforeEach(async ({page})=>{
     await expect(loginPage.homePageIdentifier).toBeVisible()
 })
 
-test("Add the product to the cart", async ()=>{
+test("Add the product to the cart", {tag:'@regression'},async ()=>{
     await dashboardPage.searchAndAddProductToCart(productName)
-    await expect(dashboardPage.addToCartSuccessMsg).toHaveText("Product Added To Cart")
+    await expect.soft(dashboardPage.addToCartSuccessMsg).toHaveText("Product Added To Cart")
 })
 
-test("Validate the product details on View Page", async ()=>{
+test("Validate the product details on View Page",{tag: '@smoke'}, async ()=>{
     await dashboardPage.searchAndViewProductDetails(productName)
     await expect(dashboardPage.viewPageProductName).toHaveText(productName) 
 })
 
+// Tag - smoke, regression
 
-let i = [10,2,3,4]
+// Allure report
+// Jenkins  - CI

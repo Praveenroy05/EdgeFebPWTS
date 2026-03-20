@@ -14,12 +14,20 @@ test.beforeEach(async ({page})=>{
    await loginPage.launchURL(url)
 })
 
-test.skip("Check if the login is working with valid credentials", async ()=>{
-   await loginPage.loginIntoApplication(email, password)
-   await expect(loginPage.homePageIdentifier).toBeVisible()
-})
+test.describe("Login Page Test Cases", async ()=>{
+   test("Check if the login is working with valid credentials", async ()=>{
+      test.step("Login Into Application", async()=>{
+         await loginPage.loginIntoApplication(email, password)
+      })
+      test.step("Validate if the login is working", async()=>{
+         await expect(loginPage.homePageIdentifier).toBeVisible()
+      })
+      
+   })
 
-test("Validate invalid login scenario", async ()=>{
-    await loginPage.invalidLogin(email, incorrectPassword)
-    await expect(loginPage.errorMessage).toHaveText("Incorrect email or password.")
+   test("Validate invalid login scenario", async ()=>{
+      await loginPage.invalidLogin(email, incorrectPassword)
+      await expect(loginPage.errorMessage).toHaveText("Incorrect email or password.")
+   })
+
 })

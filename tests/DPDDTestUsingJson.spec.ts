@@ -17,6 +17,7 @@ import datas from '../TestData/datadriven.json'
 //     password: 'Testing@1234',
 //     productName: 'ZARA COAT 3'
 //   },
+//
 //   {
 //     url: 'https://rahulshettyacademy.com/client',
 //     email: 'testnHNk@gmail.com',
@@ -39,7 +40,7 @@ test.beforeEach(async ({page})=>{
 })
 
 for(let product of datas){
-    test(`Add the product to the cart for ${product.productName}`, async ()=>{
+    test(`@smoke Add the product to the cart for ${product.productName}`, async ()=>{
         await loginPage.launchURL(product.url)
         await loginPage.loginIntoApplication(product.email, product.password)
         await expect(loginPage.homePageIdentifier).toBeVisible()
