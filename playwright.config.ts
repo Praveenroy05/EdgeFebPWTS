@@ -40,7 +40,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [['html'], ['line'], ['allure-playwright']],
   timeout : 10000,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -51,7 +51,7 @@ export default defineConfig({
     trace: 'on',
     screenshot :'on',
     video :'on',
-    headless : false,
+    headless : true,
     //viewport : {width:1280, height:720}
   },
 

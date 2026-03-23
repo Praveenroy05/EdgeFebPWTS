@@ -1,6 +1,7 @@
 import {test, expect} from '@playwright/test'
 import { LoginPage } from '../pages/LoginPage'
 import { DashboardPage } from '../pages/DashboardPage'
+import * as allure from "allure-js-commons";
 
 // Test data can be written inside the test file or you can add it in the files like excel or JSON
 
@@ -26,6 +27,8 @@ test.beforeEach(async ({page})=>{
 test("Add the product to the cart", {tag:'@regression'},async ()=>{
     await dashboardPage.searchAndAddProductToCart(productName)
     await expect.soft(dashboardPage.addToCartSuccessMsg).toHaveText("Product Added To Cart")
+    await allure.severity("critical")
+    await allure.link("https://google.com")
 })
 
 test("Validate the product details on View Page",{tag: '@smoke'}, async ()=>{
@@ -35,5 +38,8 @@ test("Validate the product details on View Page",{tag: '@smoke'}, async ()=>{
 
 // Tag - smoke, regression
 
-// Allure report
-// Jenkins  - CI
+
+// Jenkins
+// MCP
+// Playwright Agent
+// API
