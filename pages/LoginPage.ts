@@ -14,6 +14,13 @@ export class LoginPage{
     errorMessage : Locator
     homePageIdentifier : Locator
 
+    // SauceDemo-safe fallback locators (do not override existing ones)
+    usernameAlt : Locator
+    passwordAlt : Locator
+    loginBtnAlt : Locator
+    errorMessageAlt : Locator
+    homePageIdentifierAlt : Locator
+
     // To create a locator we need to have page fixture available inside the page classes.
     // Page fixture will only be available inside the test() or test.beforeEach()
     constructor(page:Page){
@@ -23,6 +30,13 @@ export class LoginPage{
         this.loginBtn = this.page.locator("#login")
         this.errorMessage = this.page.locator("#toast-container")
         this.homePageIdentifier = this.page.locator("[routerlink='/dashboard/']")   
+
+        // Fallback Sauce Demo locators
+        this.usernameAlt = this.page.getByPlaceholder("Username")
+        this.passwordAlt = this.page.getByPlaceholder("Password")
+        this.loginBtnAlt = this.page.locator("#login-button")
+        this.errorMessageAlt = this.page.locator("[data-test='error']")
+        this.homePageIdentifierAlt = this.page.locator(".inventory_list")
     }
     
     // Methods
@@ -35,16 +49,30 @@ export class LoginPage{
         await this.page.goto(url)
     }
 
+    private async getEffectiveLocator(primary: Locator, fallback: Locator): Promise<Locator> {
+        if (await primary.count() > 0) return primary
+        if (await fallback.count() > 0) return fallback
+        return primary
+    }
+
     async loginIntoApplication(username:string, password:string){
-        await this.username.fill(username)
-        await this.password.fill(password)
-        await this.loginBtn.click()
+        const userLocator = await this.getEffectiveLocator(this.username, this.usernameAlt)
+        const passLocator = await this.getEffectiveLocator(this.password, this.passwordAlt)
+        const btnLocator = await this.getEffectiveLocator(this.loginBtn, this.loginBtnAlt)
+
+        await userLocator.fill(username)
+        await passLocator.fill(password)
+        await btnLocator.click()
     }
 
     async invalidLogin(username:string, incorrectPassword:string){
-        await this.username.fill(username)
-        await this.password.fill(incorrectPassword)
-        await this.loginBtn.click()
+        const userLocator = await this.getEffectiveLocator(this.username, this.usernameAlt)
+        const passLocator = await this.getEffectiveLocator(this.password, this.passwordAlt)
+        const btnLocator = await this.getEffectiveLocator(this.loginBtn, this.loginBtnAlt)
+
+        await userLocator.fill(username)
+        await passLocator.fill(incorrectPassword)
+        await btnLocator.click()
     }
 
 
