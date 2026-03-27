@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "ci": "npm install"
     "fullTest": "npx playwirhg test",
     "smokeTest": "npx playwright test -g @smoke",
     "regressionTest": "npx playwright test -g @regression",
