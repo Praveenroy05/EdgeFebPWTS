@@ -29,7 +29,7 @@ export class LoginPage{
         this.password = this.page.getByPlaceholder("enter your passsword")
         this.loginBtn = this.page.locator("#login")
         this.errorMessage = this.page.locator("#toast-container")
-        this.homePageIdentifier = this.page.locator("[routerlink='/dashboard/']")   
+        this.homePageIdentifier = this.page.locator("div.card-body").first()
 
         // Fallback Sauce Demo locators
         this.usernameAlt = this.page.getByPlaceholder("Username")

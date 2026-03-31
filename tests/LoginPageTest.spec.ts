@@ -16,10 +16,10 @@ test.beforeEach(async ({page})=>{
 
 test.describe("Login Page Test Cases", async ()=>{
    test("Check if the login is working with valid credentials", async ()=>{
-      test.step("Login Into Application", async()=>{
+      await test.step("Login Into Application", async()=>{
          await loginPage.loginIntoApplication(email, password)
       })
-      test.step("Validate if the login is working", async()=>{
+      await test.step("Validate if the login is working", async()=>{
          await expect(loginPage.homePageIdentifier).toBeVisible()
       })
       
